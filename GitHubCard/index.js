@@ -7,21 +7,31 @@ import axios from 'axios';
     https://api.github.com/users/<your name>
 */
 axios.get('https://api.github.com/users/RNRTxScott')
-.then(res => {
-const newArr = res.data
-  newArr.forEach(item => {
-    entryPoint.appendChild(gitBro(item))
+.then(response => {
+const profile = response.data;
+  //newArr.forEach(item => {
+  //  entryPoint.appendChild(gitBro(item))
+ // })
+  //console.log('UserInfo: ', profile);
+  response.data.forEach(item => {
+    cards.append(cardCreator(item))
   })
-  //console.log(res.data);
 })
 .catch(error => {
   console.log("the data was not returned", error)
 })
+/*
+  STEP 4: Pass the data received from Github into your function,
+    and append the returned markup to the DOM as a child of .cards
+*/
+const cards = document.querySelector('.cards')
+const cardInfo = cardCreator(profile)
+cards.appendChild(cardInfo)
 
-function gitBro(profileScott){
+function cardCreator(param){
 const newCard = document.createElement('div');
 const newImg = document.createElement('img');
-const newCardInfo = document.createElement('div');
+const newCardInfo = document.createElement('h3');
 /*
 newName = document.createElement('h3'),
 newUserName = document.createElement('p'),
@@ -33,19 +43,18 @@ newFollowing = document.createElement('p'),
 newBio = document.createElement('p');
 */
 
-newCardInfo.textContent = `login: ${profileScott}`;
-newImg.src = newImg;
+newCardInfo.textContent = `UserInfo: ${name}`;
+newImg.src = param;
 newImg.classList.add('.card img');
-newCard.classList.add('.card');
+newCardInfo.classList.add('.card.name');
+newCard.classList.add('.card')
 
 
-newCard.appendChild(newImg);
-newCard.appendChild(newCardInfo);
+newCard.append(newImg);
+newCard.append(newCardInfo);
 return newCard
 }
 
-
-const entryPoint = document.querySelector('.cards')
 // console.log(entryPoint);
 
 
@@ -57,10 +66,7 @@ const entryPoint = document.querySelector('.cards')
     Skip to STEP 3.
 */
 
-/*
-  STEP 4: Pass the data received from Github into your function,
-    and append the returned markup to the DOM as a child of .cards
-*/
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -73,7 +79,13 @@ const entryPoint = document.querySelector('.cards')
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'tetondan',
+    'dustinmyers',
+    'justsml',
+    'luishrd',
+    'bigknell'
+];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
