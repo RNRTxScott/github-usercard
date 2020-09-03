@@ -1,8 +1,53 @@
+import axios from 'axios';
+
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios.get('https://api.github.com/users/RNRTxScott')
+.then(res => {
+const newArr = res.data
+  newArr.forEach(item => {
+    entryPoint.appendChild(gitBro(item))
+  })
+  //console.log(res.data);
+})
+.catch(error => {
+  console.log("the data was not returned", error)
+})
+
+function gitBro(profileScott){
+const newCard = document.createElement('div');
+const newImg = document.createElement('img');
+const newCardInfo = document.createElement('div');
+/*
+newName = document.createElement('h3'),
+newUserName = document.createElement('p'),
+newLocation = document.createElement('p'),
+newProfile = document.createElement('p'),
+newLink = document.createElement('a'),
+newFollowers = document.createElement('p'),
+newFollowing = document.createElement('p'),
+newBio = document.createElement('p');
+*/
+
+newCardInfo.textContent = `login: ${profileScott}`;
+newImg.src = newImg;
+newImg.classList.add('.card img');
+newCard.classList.add('.card');
+
+
+newCard.appendChild(newImg);
+newCard.appendChild(newCardInfo);
+return newCard
+}
+
+
+const entryPoint = document.querySelector('.cards')
+// console.log(entryPoint);
+
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
