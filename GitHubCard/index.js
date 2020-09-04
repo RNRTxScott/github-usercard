@@ -160,6 +160,10 @@ const followersArray = [
   "luishrd",
   "bigknell"
 ];
+
+
+
+
 followersArray.forEach(otUser => {
   axios.get(`https://api.github.com/users/${otUser}`)
   .then(response => {
